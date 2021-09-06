@@ -5,7 +5,8 @@ import {
   ConfigDatabaseInterface,
   PaginationInterface,
 } from "sdz-agent-types";
-const informix = require("informixdb");
+
+import informix from "informixdb";
 
 let informixConnect: any;
 export default class Connector implements ConnectorInterface {
@@ -23,11 +24,21 @@ export default class Connector implements ConnectorInterface {
     }
   }
 
-  execute(
+  close() {
+    if (informixConnect) {
+      try {
+        informixConnect.closeSync();
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  async execute(
     type: string,
     pagination: PaginationInterface
   ): Promise<Client[] | Invoice[]> {
-    let resultSet;
+    let resultSet = [];
     if (!informixConnect) {
       this.connect();
     }
@@ -38,7 +49,7 @@ export default class Connector implements ConnectorInterface {
     switch (type) {
       case "invoices":
         resultSet = informixConnect.querySync(
-          "SELECT * FROM informix.flags_text " + `skip ${skip}, limit ${limit}`
+          `SELECT * FROM informix.flags_text SKIP ${skip} LIMIT ${limit}`
         );
         break;
       case "clients":
@@ -71,12 +82,10 @@ export default class Connector implements ConnectorInterface {
             " 	and i.cgccpf = p.cgccpf " +
             " where p.tppessoa in (1, 2) " +
             " order by p.nomepessoa " +
-            `skip ${skip}, limit ${limit}`
+            ` skip ${skip}, limit ${limit}`
         );
         break;
     }
-
-    informixConnect.closeSync();
 
     return resultSet;
   }

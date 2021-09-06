@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const informix = require("informixdb");
+const informixdb_1 = __importDefault(require("informixdb"));
 let informixConnect;
 class Connector {
     constructor(config) {
@@ -9,15 +12,25 @@ class Connector {
     connect() {
         if (!informixConnect) {
             try {
-                informixConnect = informix.openSync(this.dsn);
+                informixConnect = informixdb_1.default.openSync(this.dsn);
             }
             catch (e) {
                 console.log(e);
             }
         }
     }
-    execute(type, pagination) {
-        let resultSet;
+    close() {
+        if (informixConnect) {
+            try {
+                informixConnect.closeSync();
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    async execute(type, pagination) {
+        let resultSet = [];
         if (!informixConnect) {
             this.connect();
         }
@@ -26,7 +39,7 @@ class Connector {
         const skip = page * limit;
         switch (type) {
             case "invoices":
-                resultSet = informixConnect.querySync("SELECT * FROM informix.flags_text " + `skip ${skip}, limit ${limit}`);
+                resultSet = informixConnect.querySync(`SELECT * FROM informix.flags_text SKIP ${skip} LIMIT ${limit}`);
                 break;
             case "clients":
                 resultSet = informixConnect.querySync("Select  fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
@@ -57,10 +70,9 @@ class Connector {
                     " 	and i.cgccpf = p.cgccpf " +
                     " where p.tppessoa in (1, 2) " +
                     " order by p.nomepessoa " +
-                    `skip ${skip}, limit ${limit}`);
+                    ` skip ${skip}, limit ${limit}`);
                 break;
         }
-        informixConnect.closeSync();
         return resultSet;
     }
 }
