@@ -1,7 +1,6 @@
 import {
-  Client,
   Connector,
-  Invoice,
+  DatabaseRow,
   PaginationInterface,
   RepositoryInterface,
 } from "sdz-agent-types";
@@ -11,16 +10,14 @@ export default class Repository implements RepositoryInterface {
   constructor(connector: Connector) {
     this.connector = connector;
   }
-  async getClients(pagination: PaginationInterface): Promise<Client[] | void> {
+  async getClients(pagination: PaginationInterface): Promise<DatabaseRow[]> {
     try {
-      return this.connector.execute("clients") as Promise<Client[]>;
+      return this.connector.execute("clients");
     } catch (e) {}
   }
-  async getInvoices(
-    pagination: PaginationInterface
-  ): Promise<Invoice[] | void> {
+  async getInvoices(pagination: PaginationInterface): Promise<DatabaseRow[]> {
     try {
-      return this.connector.execute("invoices") as Promise<Invoice[]>;
+      return this.connector.execute("invoices");
     } catch (e) {}
   }
 }
