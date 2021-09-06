@@ -16,14 +16,17 @@ class Connector {
             }
         }
     }
-    execute(type) {
+    execute(type, pagination) {
         let resultSet;
         if (!informixConnect) {
             this.connect();
         }
+        const page = pagination.page - 1;
+        const limit = pagination.limit;
+        const skip = page * limit;
         switch (type) {
             case "invoices":
-                resultSet = informixConnect.querySync("SELECT * FROM informix.flags_text");
+                resultSet = informixConnect.querySync("SELECT * FROM informix.flags_text " + `skip ${skip}, limit ${limit}`);
                 break;
             case "clients":
                 resultSet = informixConnect.querySync("Select  fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
@@ -53,7 +56,8 @@ class Connector {
                     " 	on i.tppessoa = p.tppessoa " +
                     " 	and i.cgccpf = p.cgccpf " +
                     " where p.tppessoa in (1, 2) " +
-                    " order by p.nomepessoa ");
+                    " order by p.nomepessoa " +
+                    `skip ${skip}, limit ${limit}`);
                 break;
         }
         informixConnect.closeSync();

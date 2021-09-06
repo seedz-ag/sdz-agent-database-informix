@@ -6,13 +6,13 @@ class Repository {
     }
     async getClients(pagination) {
         try {
-            return this.connector.execute("clients");
+            return this.connector.execute("clients", pagination);
         }
         catch (e) { }
     }
     async getInvoices(pagination) {
         try {
-            return this.connector.execute("invoices");
+            return this.connector.execute("invoices", pagination);
         }
         catch (e) { }
     }
