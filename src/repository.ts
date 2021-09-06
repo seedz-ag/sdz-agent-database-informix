@@ -12,12 +12,12 @@ export default class Repository implements RepositoryInterface {
   }
   async getClients(pagination: PaginationInterface): Promise<DatabaseRow[]> {
     try {
-      return this.connector.execute("clients");
+      return this.connector.execute("clients", pagination);
     } catch (e) {}
   }
   async getInvoices(pagination: PaginationInterface): Promise<DatabaseRow[]> {
     try {
-      return this.connector.execute("invoices");
+      return this.connector.execute("invoices", pagination);
     } catch (e) {}
   }
 }
