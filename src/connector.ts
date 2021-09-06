@@ -72,7 +72,7 @@ export default class Connector implements ConnectorInterface {
             " 	and i.cgccpf = p.cgccpf " +
             " where p.tppessoa in (1, 2) " +
             " order by p.nomepessoa " +
-            `skip ${skip}, limit ${limit}`
+            ` skip ${skip}, limit ${limit}`
         );
         break;
     }
