@@ -11,16 +11,16 @@ export default class Repository implements RepositoryInterface {
   constructor(connector: Connector) {
     this.connector = connector;
   }
-  async getClients(pagination: PaginationInterface): Promise<Client[] | void> {
+  async getClients(pagination: PaginationInterface): Promise<Client[]> {
     try {
-      return this.connector.execute("clients") as Promise<Client[]>;
+      return this.connector.execute("clients", pagination) as Promise<Client[]>;
     } catch (e) {}
   }
-  async getInvoices(
-    pagination: PaginationInterface
-  ): Promise<Invoice[] | void> {
+  async getInvoices(pagination: PaginationInterface): Promise<Invoice[]> {
     try {
-      return this.connector.execute("invoices") as Promise<Invoice[]>;
+      return this.connector.execute("invoices", pagination) as Promise<
+        Invoice[]
+      >;
     } catch (e) {}
   }
 }
