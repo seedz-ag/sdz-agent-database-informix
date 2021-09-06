@@ -24,11 +24,21 @@ export default class Connector implements ConnectorInterface {
     }
   }
 
+  close() {
+    if (informixConnect) {
+      try {
+        informixConnect.closeSync();
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   async execute(
     type: string,
     pagination: PaginationInterface
   ): Promise<Client[] | Invoice[]> {
-    let resultSet;
+    let resultSet = [];
     if (!informixConnect) {
       this.connect();
     }
@@ -76,8 +86,6 @@ export default class Connector implements ConnectorInterface {
         );
         break;
     }
-
-    informixConnect.closeSync();
 
     return resultSet;
   }
