@@ -1,9 +1,8 @@
 import {
-  Client,
   ConnectorInterface,
-  Invoice,
   ConfigDatabaseInterface,
   PaginationInterface,
+  DatabaseRow,
 } from "sdz-agent-types";
 
 import informix from "informixdb";
@@ -37,7 +36,7 @@ export default class Connector implements ConnectorInterface {
   async execute(
     type: string,
     pagination: PaginationInterface
-  ): Promise<Client[] | Invoice[]> {
+  ): Promise<DatabaseRow[]> {
     let resultSet = [];
     if (!informixConnect) {
       this.connect();
