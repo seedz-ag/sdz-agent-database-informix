@@ -4,8 +4,8 @@ Este pacote é responsável pelos repositórios de querys e conexão com o drive
 
 ## Pacotes dependentes:
 
-*informixdb
-*sdz-agent-types
+- informixdb
+- sdz-agent-types
 
 ### Estrutura de arquivos
 
