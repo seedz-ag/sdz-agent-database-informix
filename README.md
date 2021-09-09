@@ -1,16 +1,16 @@
 # sdz-database-informix
 
-### File structure
+Este pacote é responsável pelos repositórios de querys e conexão com o driver IBM Informix;
+
+## Pacotes dependentes:
+
+*informixdb
+*sdz-agent-types
+
+### Estrutura de arquivos
 
 ```
  sdz-agent-database-informix
-|__📁dist
-   |__📃connector.d.ts
-   |__📃connector.js
-   |__📃index.d.ts
-   |__📃index.js
-   |__📃repository.d.ts
-   |__📃repository.js
 |__📁src
    |__📃connector.ts
    |__📃index.ts
