@@ -47,7 +47,7 @@ class Repository {
             const page = pagination.page - 1;
             const limit = pagination.limit;
             const skip = page * limit;
-            const query = `SELECT * FROM informix.flags_text SKIP ${skip} LIMIT ${limit}`;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
             return this.connector.execute(query);
         }
         catch (e) { }
