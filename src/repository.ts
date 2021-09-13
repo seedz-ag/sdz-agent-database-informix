@@ -61,4 +61,188 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query);
     } catch (e) {}
   }
+  async getAddress(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getProperty(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getItem(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getItemBranding(
+    pagination: PaginationInterface
+  ): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getItemGroup(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getRequest(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getRequestItem(
+    pagination: PaginationInterface
+  ): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getBilling(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getPaymentType(
+    pagination: PaginationInterface
+  ): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getProvider(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getAccountPay(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getAccountReceivable(
+    pagination: PaginationInterface
+  ): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getVendor(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getEmployee(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getInventory(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
+  async getTest(pagination: PaginationInterface): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+
+      return this.connector.execute(query);
+    } catch (e) {}
+  }
 }
