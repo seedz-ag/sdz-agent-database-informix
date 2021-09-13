@@ -52,5 +52,165 @@ class Repository {
         }
         catch (e) { }
     }
+    async getAddress(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getProperty(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getItem(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getItemBranding(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getItemGroup(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getRequest(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getRequestItem(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getBilling(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getPaymentType(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getProvider(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getAccountPay(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getAccountReceivable(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getVendor(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getEmployee(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getInventory(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
+    async getTest(pagination) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
+            return this.connector.execute(query);
+        }
+        catch (e) { }
+    }
 }
 exports.default = Repository;
