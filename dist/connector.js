@@ -7,7 +7,7 @@ const informixdb_1 = __importDefault(require("informixdb"));
 let informixConnect;
 class Connector {
     constructor(config) {
-        this.dsn = `SERVER=${config.server};DATABASE=${config.collation};HOST=${config.host};SERVICE=${config.port};UID=${config.username};PWD=${config.password};`;
+        this.dsn = `SERVER=${config.server};DATABASE=${config.collation};HOST=${config.host};SERVICE=${config.port};UID=${config.username};PWD=${config.password};CLIENT_LOCALE=${config.locale}`;
     }
     connect() {
         if (!informixConnect) {
