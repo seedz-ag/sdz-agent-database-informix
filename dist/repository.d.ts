@@ -3,7 +3,6 @@ export default class Repository implements RepositoryInterface {
     private connector;
     constructor(connector: Connector);
     getClients(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
-    getInvoices(pagination: PaginationInterface): Promise<DatabaseRow[]>;
     getAddress(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getProperty(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
@@ -11,8 +10,8 @@ export default class Repository implements RepositoryInterface {
     getItemGroup(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getRequest(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getRequestItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
-    getBilling(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
-    getBillingItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
+    getInvoices(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
+    getInvoicesItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getPaymentType(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getProvider(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getAccountPay(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;

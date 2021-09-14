@@ -80,16 +80,6 @@ class Repository {
         }
         catch (e) { }
     }
-    async getInvoices(pagination) {
-        try {
-            const page = pagination.page - 1;
-            const limit = pagination.limit;
-            const skip = page * limit;
-            const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
-            return this.connector.execute(query);
-        }
-        catch (e) { }
-    }
     async getAddress(pagination, type) {
         try {
             const page = pagination.page - 1;
@@ -273,7 +263,8 @@ class Repository {
             switch (type) {
                 case "T":
                     query =
-                        " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
+                        " Select * from ( " +
+                            " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
                             "  a.cgccpf as id, nvl(a.marcaf, ' ') as descricao  " +
                             "  from cffornec a, cmgrupos b, cofilial fil  " +
                             " where a.tppessoa = b.tppessoa " +
@@ -287,12 +278,13 @@ class Repository {
                             " where a.tppessoa = b.tppessoa" +
                             "  and a.cgccpf= b.cgccpf  " +
                             "  and fil.filial in (select min(filial) from cofilial)  " +
-                            "  and nvl(a.marcaf, ' ') <> ' ' " +
+                            "  and nvl(a.marcaf, ' ') <> ' ' )" +
                             ` SKIP ${skip} LIMIT ${limit}`;
                     break;
                 default:
                     query =
-                        " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
+                        " Select * from ( " +
+                            " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
                             "  a.cgccpf as id, nvl(a.marcaf, ' ') as descricao  " +
                             "  from cffornec a, cmgrupos b, cofilial fil  " +
                             " where a.tppessoa = b.tppessoa " +
@@ -306,7 +298,7 @@ class Repository {
                             " where a.tppessoa = b.tppessoa" +
                             "  and a.cgccpf= b.cgccpf  " +
                             "  and fil.filial in (select min(filial) from cofilial)  " +
-                            "  and nvl(a.marcaf, ' ') <> ' ' " +
+                            "  and nvl(a.marcaf, ' ') <> ' ' )" +
                             ` SKIP ${skip} LIMIT ${limit}`;
             }
             return this.connector.execute(query);
@@ -460,7 +452,7 @@ class Repository {
         }
         catch (e) { }
     }
-    async getBilling(pagination, type) {
+    async getInvoices(pagination, type) {
         try {
             const page = pagination.page - 1;
             const limit = pagination.limit;
@@ -541,7 +533,7 @@ class Repository {
         }
         catch (e) { }
     }
-    async getBillingItem(pagination, type) {
+    async getInvoicesItem(pagination, type) {
         try {
             const page = pagination.page - 1;
             const limit = pagination.limit;

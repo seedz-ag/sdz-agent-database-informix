@@ -286,6 +286,7 @@ export default class Repository implements RepositoryInterface {
       switch (type) {
         case "T":
           query =
+            " Select * from ( " +
             " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
             "  a.cgccpf as id, nvl(a.marcaf, ' ') as descricao  " +
             "  from cffornec a, cmgrupos b, cofilial fil  " +
@@ -300,11 +301,12 @@ export default class Repository implements RepositoryInterface {
             " where a.tppessoa = b.tppessoa" +
             "  and a.cgccpf= b.cgccpf  " +
             "  and fil.filial in (select min(filial) from cofilial)  " +
-            "  and nvl(a.marcaf, ' ') <> ' ' " +
+            "  and nvl(a.marcaf, ' ') <> ' ' )" +
             ` SKIP ${skip} LIMIT ${limit}`;
           break;
         default:
           query =
+            " Select * from ( " +
             " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
             "  a.cgccpf as id, nvl(a.marcaf, ' ') as descricao  " +
             "  from cffornec a, cmgrupos b, cofilial fil  " +
@@ -319,7 +321,7 @@ export default class Repository implements RepositoryInterface {
             " where a.tppessoa = b.tppessoa" +
             "  and a.cgccpf= b.cgccpf  " +
             "  and fil.filial in (select min(filial) from cofilial)  " +
-            "  and nvl(a.marcaf, ' ') <> ' ' " +
+            "  and nvl(a.marcaf, ' ') <> ' ' )" +
             ` SKIP ${skip} LIMIT ${limit}`;
       }
 
