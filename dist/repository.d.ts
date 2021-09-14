@@ -12,6 +12,7 @@ export default class Repository implements RepositoryInterface {
     getRequest(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getRequestItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getBilling(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
+    getBillingItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getPaymentType(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getProvider(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     getAccountPay(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
