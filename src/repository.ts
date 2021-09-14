@@ -88,17 +88,7 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query);
     } catch (e) {}
   }
-  async getInvoices(pagination: PaginationInterface): Promise<DatabaseRow[]> {
-    try {
-      const page = pagination.page - 1;
-      const limit = pagination.limit;
-      const skip = page * limit;
 
-      const query = `SELECT * FROM informix.clientes SKIP ${skip} LIMIT ${limit}`;
-
-      return this.connector.execute(query);
-    } catch (e) {}
-  }
   async getAddress(
     pagination: PaginationInterface,
     type: string
@@ -495,7 +485,7 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query);
     } catch (e) {}
   }
-  async getBilling(
+  async getInvoices(
     pagination: PaginationInterface,
     type: string
   ): Promise<DatabaseRow[]> {
@@ -580,7 +570,7 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query);
     } catch (e) {}
   }
-  async getBillingItem(
+  async getInvoicesItem(
     pagination: PaginationInterface,
     type: string
   ): Promise<DatabaseRow[]> {
