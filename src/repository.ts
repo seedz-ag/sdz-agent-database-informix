@@ -34,7 +34,7 @@ export default class Repository implements RepositoryInterface {
   async countTest(type: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getTestQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -131,7 +131,7 @@ export default class Repository implements RepositoryInterface {
         default:
           query = await this.getClientsQueryPartial();
       }
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -153,7 +153,7 @@ export default class Repository implements RepositoryInterface {
   async countAddress(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getAddressQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -187,7 +187,7 @@ export default class Repository implements RepositoryInterface {
   async countProperty(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getPropertyQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -251,7 +251,7 @@ export default class Repository implements RepositoryInterface {
   async countItem(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -292,7 +292,7 @@ export default class Repository implements RepositoryInterface {
   async countItemBranding(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemBrandingQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -322,7 +322,7 @@ export default class Repository implements RepositoryInterface {
   async countItemGroup(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemGroupQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -408,7 +408,7 @@ export default class Repository implements RepositoryInterface {
         default:
           query = await this.getRequestQueryPartial();
       }
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -443,7 +443,7 @@ export default class Repository implements RepositoryInterface {
   async countRequestItem(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getRequestItemQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -499,7 +499,7 @@ export default class Repository implements RepositoryInterface {
   async countInvoices(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getInvoicesQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -581,7 +581,7 @@ export default class Repository implements RepositoryInterface {
         default:
           query = await this.getInvoicesItemQueryPartial();
       }
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -595,7 +595,7 @@ export default class Repository implements RepositoryInterface {
   async countPaymentType(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getPaymentTypeQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -640,7 +640,7 @@ export default class Repository implements RepositoryInterface {
   async countProviderType(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getProviderQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -733,7 +733,7 @@ export default class Repository implements RepositoryInterface {
         default:
           query = await this.getAccountPayQueryPartial();
       }
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -837,7 +837,7 @@ export default class Repository implements RepositoryInterface {
         default:
           query = await this.getAccountReceivableQueryPartial();
       }
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -879,7 +879,7 @@ export default class Repository implements RepositoryInterface {
   async countVendor(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getVendorQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -933,7 +933,7 @@ export default class Repository implements RepositoryInterface {
   async countEmployee(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getEmployeeQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
@@ -973,7 +973,7 @@ export default class Repository implements RepositoryInterface {
   async countInventory(type?: string): Promise<DatabaseRow[]> {
     try {
       query = await this.getInventoryQuery();
-      let count = `Selet count * from (${query})`;
+      let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }

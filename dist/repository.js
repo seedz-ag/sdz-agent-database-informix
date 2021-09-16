@@ -22,7 +22,7 @@ class Repository {
     async countTest(type) {
         try {
             query = await this.getTestQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -116,7 +116,7 @@ class Repository {
                 default:
                     query = await this.getClientsQueryPartial();
             }
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -135,7 +135,7 @@ class Repository {
     async countAddress(type) {
         try {
             query = await this.getAddressQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -170,7 +170,7 @@ class Repository {
     async countProperty(type) {
         try {
             query = await this.getPropertyQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -231,7 +231,7 @@ class Repository {
     async countItem(type) {
         try {
             query = await this.getItemQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -269,7 +269,7 @@ class Repository {
     async countItemBranding(type) {
         try {
             query = await this.getItemBrandingQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -296,7 +296,7 @@ class Repository {
     async countItemGroup(type) {
         try {
             query = await this.getItemGroupQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -375,7 +375,7 @@ class Repository {
                 default:
                     query = await this.getRequestQueryPartial();
             }
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -411,7 +411,7 @@ class Repository {
     async countRequestItem(type) {
         try {
             query = await this.getRequestItemQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -464,7 +464,7 @@ class Repository {
     async countInvoices(type) {
         try {
             query = await this.getInvoicesQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -539,7 +539,7 @@ class Repository {
                 default:
                     query = await this.getInvoicesItemQueryPartial();
             }
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -554,7 +554,7 @@ class Repository {
     async countPaymentType(type) {
         try {
             query = await this.getPaymentTypeQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -596,7 +596,7 @@ class Repository {
     async countProviderType(type) {
         try {
             query = await this.getProviderQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -682,7 +682,7 @@ class Repository {
                 default:
                     query = await this.getAccountPayQueryPartial();
             }
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -783,7 +783,7 @@ class Repository {
                 default:
                     query = await this.getAccountReceivableQueryPartial();
             }
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -825,7 +825,7 @@ class Repository {
     async countVendor(type) {
         try {
             query = await this.getVendorQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -875,7 +875,7 @@ class Repository {
     async countEmployee(type) {
         try {
             query = await this.getEmployeeQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
@@ -912,7 +912,7 @@ class Repository {
     async countInventory(type) {
         try {
             query = await this.getInventoryQuery();
-            let count = `Selet count * from (${query})`;
+            let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
