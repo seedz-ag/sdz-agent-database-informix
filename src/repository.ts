@@ -31,7 +31,10 @@ export default class Repository implements RepositoryInterface {
   async getTestQuery(): Promise<string> {
     return (query = "SELECT * FROM informix.clientes ");
   }
-  async countTest(type: string): Promise<DatabaseRow[]> {
+  async countTest(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getTestQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -122,7 +125,10 @@ export default class Repository implements RepositoryInterface {
       "   and (cli.dtcadastro = cast(current as date) or cli.dtatualiza = cast(current as date)) " +
       " order by p.nomepessoa ");
   }
-  async countClients(type: string): Promise<DatabaseRow[]> {
+  async countClients(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
@@ -150,7 +156,10 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
-  async countAddress(type?: string): Promise<DatabaseRow[]> {
+  async countAddress(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getAddressQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -184,7 +193,10 @@ export default class Repository implements RepositoryInterface {
       " where fil.filial in (select min(filial) from cofilial) " +
       "      where e.tppessoa in (1,2) ");
   }
-  async countProperty(type?: string): Promise<DatabaseRow[]> {
+  async countProperty(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getPropertyQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -248,7 +260,10 @@ export default class Repository implements RepositoryInterface {
       "	on b.produto = p.produto " +
       " order by p.descrprodut ");
   }
-  async countItem(type?: string): Promise<DatabaseRow[]> {
+  async countItem(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -289,7 +304,10 @@ export default class Repository implements RepositoryInterface {
       "  and fil.filial in (select min(filial) from cofilial)  " +
       "  and nvl(a.marcaf, ' ') <> ' ' ) ");
   }
-  async countItemBranding(type?: string): Promise<DatabaseRow[]> {
+  async countItemBranding(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemBrandingQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -319,7 +337,10 @@ export default class Repository implements RepositoryInterface {
       " where fil.filial in (select min(filial) from cofilial) " +
       " order by a.descrgrupo ");
   }
-  async countItemGroup(type?: string): Promise<DatabaseRow[]> {
+  async countItemGroup(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getItemGroupQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -399,7 +420,10 @@ export default class Repository implements RepositoryInterface {
       "     on f.filial = o.filial " +
       " where o.dtorcament = cast(current as date) ");
   }
-  async countRequest(type: string): Promise<DatabaseRow[]> {
+  async countRequest(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
@@ -440,7 +464,10 @@ export default class Repository implements RepositoryInterface {
       "     where year(o.dtorcament) = year(current) " +
       " 	  order by o.id_orccap desc ");
   }
-  async countRequestItem(type?: string): Promise<DatabaseRow[]> {
+  async countRequestItem(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getRequestItemQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -496,7 +523,10 @@ export default class Repository implements RepositoryInterface {
       "    where year(n.dtnota) = year(current) " +
       "    order by n.nronota desc ");
   }
-  async countInvoices(type?: string): Promise<DatabaseRow[]> {
+  async countInvoices(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getInvoicesQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -572,7 +602,10 @@ export default class Repository implements RepositoryInterface {
       "    on f.filial = n.filial " +
       " where n.dtnota = cast(current as date) ");
   }
-  async countInvoicesItem(type: string): Promise<DatabaseRow[]> {
+  async countInvoicesItem(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
@@ -592,7 +625,10 @@ export default class Repository implements RepositoryInterface {
       " from crforpgt f, cofilial fil " +
       " where fil.filial in (select min(filial) from cofilial) ");
   }
-  async countPaymentType(type?: string): Promise<DatabaseRow[]> {
+  async countPaymentType(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getPaymentTypeQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -637,7 +673,10 @@ export default class Repository implements RepositoryInterface {
       "   on fil.filial in (select min(filial) from cofilial) " +
       " where f.tppessoa in (1,2) ");
   }
-  async countProviderType(type?: string): Promise<DatabaseRow[]> {
+  async countProvider(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getProviderQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -724,7 +763,10 @@ export default class Repository implements RepositoryInterface {
       "   where o.liquidado = 'N' " +
       "      and o.dtdocto = cast(current as date) ");
   }
-  async countAccountPay(type: string): Promise<DatabaseRow[]> {
+  async countAccountPay(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
@@ -828,7 +870,10 @@ export default class Repository implements RepositoryInterface {
       "     and d.dtemisgrav = cast(current as date) " +
       "  order by  p.nomepessoa ");
   }
-  async countAccountReceivable(type: string): Promise<DatabaseRow[]> {
+  async countAccountReceivable(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
@@ -876,7 +921,10 @@ export default class Repository implements RepositoryInterface {
       "         on t.cidade = c.cidade " +
       "    where a.ativo = 'S' ");
   }
-  async countVendor(type?: string): Promise<DatabaseRow[]> {
+  async countVendor(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getVendorQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -930,7 +978,10 @@ export default class Repository implements RepositoryInterface {
       "        on t.cidade = c.cidade " +
       "   where a.ativo = 'S' ");
   }
-  async countEmployee(type?: string): Promise<DatabaseRow[]> {
+  async countEmployee(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getEmployeeQuery();
       let count = `SELECT count (*) as total from (${query})`;
@@ -970,7 +1021,10 @@ export default class Repository implements RepositoryInterface {
       "       and (dtfim is null or dtfim >= cast(current as date)) " +
       "     where  e.saldocontabil > 0 ");
   }
-  async countInventory(type?: string): Promise<DatabaseRow[]> {
+  async countInventory(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
     try {
       query = await this.getInventoryQuery();
       let count = `SELECT count (*) as total from (${query})`;
