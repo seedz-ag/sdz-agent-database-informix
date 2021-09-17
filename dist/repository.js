@@ -19,7 +19,7 @@ class Repository {
     async getTestQuery() {
         return (query = "SELECT * FROM informix.clientes ");
     }
-    async countTest(type) {
+    async countTest(pagination, type) {
         try {
             query = await this.getTestQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -107,7 +107,7 @@ class Repository {
                 "   and (cli.dtcadastro = cast(current as date) or cli.dtatualiza = cast(current as date)) " +
                 " order by p.nomepessoa ");
     }
-    async countClients(type) {
+    async countClients(pagination, type) {
         try {
             switch (type) {
                 case "T":
@@ -132,7 +132,7 @@ class Repository {
         }
         catch (e) { }
     }
-    async countAddress(type) {
+    async countAddress(pagination, type) {
         try {
             query = await this.getAddressQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -167,7 +167,7 @@ class Repository {
                 " where fil.filial in (select min(filial) from cofilial) " +
                 "      where e.tppessoa in (1,2) ");
     }
-    async countProperty(type) {
+    async countProperty(pagination, type) {
         try {
             query = await this.getPropertyQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -228,7 +228,7 @@ class Repository {
                 "	on b.produto = p.produto " +
                 " order by p.descrprodut ");
     }
-    async countItem(type) {
+    async countItem(pagination, type) {
         try {
             query = await this.getItemQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -266,7 +266,7 @@ class Repository {
                 "  and fil.filial in (select min(filial) from cofilial)  " +
                 "  and nvl(a.marcaf, ' ') <> ' ' ) ");
     }
-    async countItemBranding(type) {
+    async countItemBranding(pagination, type) {
         try {
             query = await this.getItemBrandingQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -293,7 +293,7 @@ class Repository {
                 " where fil.filial in (select min(filial) from cofilial) " +
                 " order by a.descrgrupo ");
     }
-    async countItemGroup(type) {
+    async countItemGroup(pagination, type) {
         try {
             query = await this.getItemGroupQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -366,7 +366,7 @@ class Repository {
                 "     on f.filial = o.filial " +
                 " where o.dtorcament = cast(current as date) ");
     }
-    async countRequest(type) {
+    async countRequest(pagination, type) {
         try {
             switch (type) {
                 case "T":
@@ -408,7 +408,7 @@ class Repository {
                 "     where year(o.dtorcament) = year(current) " +
                 " 	  order by o.id_orccap desc ");
     }
-    async countRequestItem(type) {
+    async countRequestItem(pagination, type) {
         try {
             query = await this.getRequestItemQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -461,7 +461,7 @@ class Repository {
                 "    where year(n.dtnota) = year(current) " +
                 "    order by n.nronota desc ");
     }
-    async countInvoices(type) {
+    async countInvoices(pagination, type) {
         try {
             query = await this.getInvoicesQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -530,7 +530,7 @@ class Repository {
                 "    on f.filial = n.filial " +
                 " where n.dtnota = cast(current as date) ");
     }
-    async countInvoicesItem(type) {
+    async countInvoicesItem(pagination, type) {
         try {
             switch (type) {
                 case "T":
@@ -551,7 +551,7 @@ class Repository {
                 " from crforpgt f, cofilial fil " +
                 " where fil.filial in (select min(filial) from cofilial) ");
     }
-    async countPaymentType(type) {
+    async countPaymentType(pagination, type) {
         try {
             query = await this.getPaymentTypeQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -593,7 +593,7 @@ class Repository {
                 "   on fil.filial in (select min(filial) from cofilial) " +
                 " where f.tppessoa in (1,2) ");
     }
-    async countProviderType(type) {
+    async countProvider(pagination, type) {
         try {
             query = await this.getProviderQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -673,7 +673,7 @@ class Repository {
                 "   where o.liquidado = 'N' " +
                 "      and o.dtdocto = cast(current as date) ");
     }
-    async countAccountPay(type) {
+    async countAccountPay(pagination, type) {
         try {
             switch (type) {
                 case "T":
@@ -774,7 +774,7 @@ class Repository {
                 "     and d.dtemisgrav = cast(current as date) " +
                 "  order by  p.nomepessoa ");
     }
-    async countAccountReceivable(type) {
+    async countAccountReceivable(pagination, type) {
         try {
             switch (type) {
                 case "T":
@@ -822,7 +822,7 @@ class Repository {
                 "         on t.cidade = c.cidade " +
                 "    where a.ativo = 'S' ");
     }
-    async countVendor(type) {
+    async countVendor(pagination, type) {
         try {
             query = await this.getVendorQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -872,7 +872,7 @@ class Repository {
                 "        on t.cidade = c.cidade " +
                 "   where a.ativo = 'S' ");
     }
-    async countEmployee(type) {
+    async countEmployee(pagination, type) {
         try {
             query = await this.getEmployeeQuery();
             let count = `SELECT count (*) as total from (${query})`;
@@ -909,7 +909,7 @@ class Repository {
                 "       and (dtfim is null or dtfim >= cast(current as date)) " +
                 "     where  e.saldocontabil > 0 ");
     }
-    async countInventory(type) {
+    async countInventory(pagination, type) {
         try {
             query = await this.getInventoryQuery();
             let count = `SELECT count (*) as total from (${query})`;
