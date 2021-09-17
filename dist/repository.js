@@ -164,8 +164,7 @@ class Repository {
                 " f.cgccpf as idCliente, f.nompropr as razaoSocial, 0 as cnpj, '' as celular, '' as telefone, '' as inscestadual, '' as atividade, " +
                 " f.vlrareapropr as tamanho, 'ha' as unidadeMedidaTamanho " +
                 "  from ciproagr f, cofilial fil " +
-                " where fil.filial in (select min(filial) from cofilial) " +
-                "      where e.tppessoa in (1,2) ");
+                " where fil.filial in (select min(filial) from cofilial) ");
     }
     async countProperty(pagination, type) {
         try {
