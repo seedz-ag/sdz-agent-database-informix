@@ -303,7 +303,7 @@ export default class Repository implements RepositoryInterface {
       "  and fil.filial in (select min(filial) from cofilial)  " +
       "  and nvl(a.marcaf, ' ') <> ' ' ) ");
   }
-  async countItemBranding(
+  async countItemsBranding(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -336,7 +336,7 @@ export default class Repository implements RepositoryInterface {
       " where fil.filial in (select min(filial) from cofilial) " +
       " order by a.descrgrupo ");
   }
-  async countItemGroup(
+  async countItemsGroup(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -346,7 +346,7 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getItemGroup(
+  async getItemsGroup(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -618,23 +618,23 @@ export default class Repository implements RepositoryInterface {
     } catch (e) {}
   }
   //Invoices
-  async getPaymentTypeQuery(): Promise<string> {
+  async getPaymentsTypeQuery(): Promise<string> {
     return (query =
       "Select fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, f.formapgto as id, f.descrforma as descricao " +
       " from crforpgt f, cofilial fil " +
       " where fil.filial in (select min(filial) from cofilial) ");
   }
-  async countPaymentType(
+  async countPaymentsType(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getPaymentTypeQuery();
+      query = await this.getPaymentsTypeQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getPaymentType(
+  async getPaymentsType(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -643,13 +643,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getPaymentTypeQuery();
+      query = await this.getPaymentsTypeQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Provider
-  async getProviderQuery(): Promise<string> {
+  async getProvidersQuery(): Promise<string> {
     return (query =
       "select fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, p.cgccpf as id, " +
       "      p.cgccpf as documento, nvl(p.razaoSocial, ' ') as razaoSocial, nvl(p.nomeguerra, ' ') as nomeFantasia, e.fone as telefoneFixo1, ' ' as telefoneFixo2, nvl(e.celular, ' ') as celular, " +
@@ -672,17 +672,17 @@ export default class Repository implements RepositoryInterface {
       "   on fil.filial in (select min(filial) from cofilial) " +
       " where f.tppessoa in (1,2) ");
   }
-  async countProvider(
+  async countProviders(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getProviderQuery();
+      query = await this.getProvidersQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getProvider(
+  async getProviders(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -691,13 +691,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getProviderQuery();
+      query = await this.getProvidersQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Account Pay
-  async getAccountPay(
+  async getAccountsPay(
     pagination: PaginationInterface,
     type: string
   ): Promise<DatabaseRow[]> {
