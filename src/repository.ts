@@ -184,7 +184,7 @@ export default class Repository implements RepositoryInterface {
       "      where e.tppessoa in (1,2) ");
   }
   //Property
-  async getPropertyQuery(): Promise<string> {
+  async getPropertiesQuery(): Promise<string> {
     return (query =
       "Select fil.cgccpf as cnpjOrigemDados, f.cgccpf || f.seqproprieagr as id, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
       " f.cgccpf as idCliente, f.nompropr as razaoSocial, 0 as cnpj, '' as celular, '' as telefone, '' as inscestadual, '' as atividade, " +
@@ -192,17 +192,17 @@ export default class Repository implements RepositoryInterface {
       "  from ciproagr f, cofilial fil " +
       " where fil.filial in (select min(filial) from cofilial) ");
   }
-  async countProperty(
+  async countProperties(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getPropertyQuery();
+      query = await this.getPropertiesQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getProperty(
+  async getProperties(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -211,13 +211,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getPropertyQuery();
+      query = await this.getPropertiesQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Item
-  async getItemQuery(): Promise<string> {
+  async getItemsQuery(): Promise<string> {
     return (query =
       "Select fil.cgccpf as cnpjOrigemDados,p.produto as id, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao," +
       "	 '' as SKU, p.descrprodut as descricao, nvl(m.marcaf, ' ') as branding, p.unidvenda as um, 'Produto' as tipo, p.listaforn as IdFornecedor," +
@@ -259,17 +259,17 @@ export default class Repository implements RepositoryInterface {
       "	on b.produto = p.produto " +
       " order by p.descrprodut ");
   }
-  async countItem(
+  async countItems(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getItemQuery();
+      query = await this.getItemsQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getItem(
+  async getItems(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -278,13 +278,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getItemQuery();
+      query = await this.getItemsQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Item Branding
-  async getItemBrandingQuery(): Promise<string> {
+  async getItemsBrandingQuery(): Promise<string> {
     return (query =
       " Select * from ( " +
       " Select distinct fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
@@ -308,12 +308,12 @@ export default class Repository implements RepositoryInterface {
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getItemBrandingQuery();
+      query = await this.getItemsBrandingQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getItemBranding(
+  async getItemsBranding(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -322,13 +322,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getItemBrandingQuery();
+      query = await this.getItemsBrandingQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Item Group
-  async getItemGroupQuery(): Promise<string> {
+  async getItemsGroupQuery(): Promise<string> {
     return (query =
       "Select  fil.cgccpf as cnpjOrigemDados,  current as dataCadastro, current as dataAtualizacao,  " +
       " a.id_grupos AS id, a.descrgrupo as descricao " +
@@ -341,7 +341,7 @@ export default class Repository implements RepositoryInterface {
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getItemGroupQuery();
+      query = await this.getItemsGroupQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
@@ -355,13 +355,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getItemGroupQuery();
+      query = await this.getItemsGroupQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Request
-  async getRequest(
+  async getOrders(
     pagination: PaginationInterface,
     type: string
   ): Promise<DatabaseRow[]> {
@@ -372,16 +372,16 @@ export default class Repository implements RepositoryInterface {
 
       switch (type) {
         case "T":
-          query = await this.getRequestQueryTotal();
+          query = await this.getOrdersQueryTotal();
           break;
         default:
-          query = await this.getRequestQueryPartial();
+          query = await this.getOrdersQueryPartial();
       }
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
-  async getRequestQueryTotal(): Promise<string> {
+  async getOrdersQueryTotal(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDadospedido, ' ' as regraNegocio, o.id_orccap as id,  current as dataCadastro, current as dataAtualizacao,  " +
       "          o.nroorcament as IdPedidoQion, o.dtorcament as dataEmissao, 0 as status, p.cgccpf as idCliente, p.cgccpf as documentocliente, " +
@@ -400,7 +400,7 @@ export default class Repository implements RepositoryInterface {
       "     on f.filial = o.filial " +
       " where year(o.dtorcament) = year(current) ");
   }
-  async getRequestQueryPartial(): Promise<string> {
+  async getOrdersQueryPartial(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDadospedido, ' ' as regraNegocio, o.id_orccap as id,  current as dataCadastro, current as dataAtualizacao,  " +
       "          o.nroorcament as IdPedidoQion, o.dtorcament as dataEmissao, 0 as status, p.cgccpf as idCliente, p.cgccpf as documentocliente, " +
@@ -419,24 +419,24 @@ export default class Repository implements RepositoryInterface {
       "     on f.filial = o.filial " +
       " where o.dtorcament = cast(current as date) ");
   }
-  async countRequest(
+  async countOrders(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
-          query = await this.getRequestQueryTotal();
+          query = await this.getOrdersQueryTotal();
           break;
         default:
-          query = await this.getRequestQueryPartial();
+          query = await this.getOrdersQueryPartial();
       }
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
   //Request Item
-  async getRequestItemQuery(): Promise<string> {
+  async getOrdersItemQuery(): Promise<string> {
     return (query =
       " Select f.cgccpf as cnpjOrigemDados, ' ' as regraNegocio, o.id_orccap || nrolinha as idPedidoItem,  cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
       " 	      i.id_orccap as idPedido, o.nroorcament as idPedidoQion, o.dtorcament as dataEmissao, 0 as status, 0 as barter, x.cgccpf as documentocliente,                              " +
@@ -463,17 +463,17 @@ export default class Repository implements RepositoryInterface {
       "     where year(o.dtorcament) = year(current) " +
       " 	  order by o.id_orccap desc ");
   }
-  async countRequestItem(
+  async countOrdersItem(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getRequestItemQuery();
+      query = await this.getOrdersItemQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getRequestItem(
+  async getOrdersItem(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -482,7 +482,7 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getRequestItemQuery();
+      query = await this.getOrdersItemQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
@@ -708,16 +708,16 @@ export default class Repository implements RepositoryInterface {
 
       switch (type) {
         case "T":
-          query = await this.getAccountPayQueryTotal();
+          query = await this.getAccountsPayQueryTotal();
           break;
         default:
-          query = await this.getAccountPayQueryPartial();
+          query = await this.getAccountsPayQueryPartial();
       }
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
-  async getAccountPayQueryTotal(): Promise<string> {
+  async getAccountsPayQueryTotal(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDados, o.dtdocto as dataCadastro,  cast(current as date) as dataAtualizacao, " +
       "        o.id_ordpag as titulo, p.cgccpf as idFornecedor, nvl(p.nomepessoa, ' ') as nomeFornecedor, o.dtdocto as dtEmissao, " +
@@ -739,7 +739,7 @@ export default class Repository implements RepositoryInterface {
       "     on  q.id_ordpag = o.id_ordpag " +
       "    where year(dtdocto) = year(current) ");
   }
-  async getAccountPayQueryPartial(): Promise<string> {
+  async getAccountsPayQueryPartial(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDados, o.dtdocto as dataCadastro,  cast(current as date) as dataAtualizacao, " +
       "        o.id_ordpag as titulo, p.cgccpf as idFornecedor, nvl(p.nomepessoa, ' ') as nomeFornecedor, o.dtdocto as dtEmissao, " +
@@ -762,24 +762,24 @@ export default class Repository implements RepositoryInterface {
       "   where o.liquidado = 'N' " +
       "      and o.dtdocto = cast(current as date) ");
   }
-  async countAccountPay(
+  async countAccountsPay(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
-          query = await this.getAccountPayQueryTotal();
+          query = await this.getAccountsPayQueryTotal();
           break;
         default:
-          query = await this.getAccountPayQueryPartial();
+          query = await this.getAccountsPayQueryPartial();
       }
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
   //Account Receivable
-  async getAccountReceivable(
+  async getAccountsReceivable(
     pagination: PaginationInterface,
     type: string
   ): Promise<DatabaseRow[]> {
@@ -790,16 +790,16 @@ export default class Repository implements RepositoryInterface {
 
       switch (type) {
         case "T":
-          query = await this.getAccountReceivableQueryTotal();
+          query = await this.getAccountsReceivableQueryTotal();
           break;
         default:
-          query = await this.getAccountReceivableQueryPartial();
+          query = await this.getAccountsReceivableQueryPartial();
       }
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
-  async getAccountReceivableQueryTotal(): Promise<string> {
+  async getAccountsReceivableQueryTotal(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDados, a.id_fatura as id, d.dtemisgrav as dataCadastro, cast(current as date) as dataAtualizacao, " +
       "        d.id_duplic as titulo,  p.cgccpf as idCliente, p.nomepessoa as nomeCliente, a.dtemissao as dtEmissao,  " +
@@ -834,7 +834,7 @@ export default class Repository implements RepositoryInterface {
       "     or (d.liquidado = 'S' and year(d.dtemisgrav) = year(current)) " +
       "   order by  p.nomepessoa ");
   }
-  async getAccountReceivableQueryPartial(): Promise<string> {
+  async getAccountsReceivableQueryPartial(): Promise<string> {
     return (query =
       " select f.cgccpf as cnpjOrigemDados, a.id_fatura as id, d.dtemisgrav as dataCadastro, cast(current as date) as dataAtualizacao, " +
       "        d.id_duplic as titulo,  p.cgccpf as idCliente, p.nomepessoa as nomeCliente, a.dtemissao as dtEmissao,  " +
@@ -869,17 +869,17 @@ export default class Repository implements RepositoryInterface {
       "     and d.dtemisgrav = cast(current as date) " +
       "  order by  p.nomepessoa ");
   }
-  async countAccountReceivable(
+  async countAccountsReceivable(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
       switch (type) {
         case "T":
-          query = await this.getAccountReceivableQueryTotal();
+          query = await this.getAccountsReceivableQueryTotal();
           break;
         default:
-          query = await this.getAccountReceivableQueryPartial();
+          query = await this.getAccountsReceivableQueryPartial();
       }
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
@@ -887,7 +887,7 @@ export default class Repository implements RepositoryInterface {
   }
 
   //Vendor
-  async getVendorQuery(): Promise<string> {
+  async getVendorsQuery(): Promise<string> {
     return (query =
       " Select f.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao,  " +
       "  a.id_agente as id, p.cgccpf as documento, p.nomepessoa as razaoSocial, e.fone as telefoneFixo1, nvl(e.fax, ' ') as telefoneFixo2, " +
@@ -920,17 +920,17 @@ export default class Repository implements RepositoryInterface {
       "         on t.cidade = c.cidade " +
       "    where a.ativo = 'S' ");
   }
-  async countVendor(
+  async countVendors(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getVendorQuery();
+      query = await this.getVendorsQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getVendor(
+  async getVendors(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -939,14 +939,14 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getVendorQuery();
+      query = await this.getVendorsQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
 
   //Employee
-  async getEmployeeQuery(): Promise<string> {
+  async getEmployeesQuery(): Promise<string> {
     return (query =
       " Select f.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao,  " +
       "  a.id_agente as idFuncionario, p.cgccpf as documento, p.nomepessoa as nome, e.celular, nvl(e.endeletronic, ' ') as email,  " +
@@ -977,17 +977,17 @@ export default class Repository implements RepositoryInterface {
       "        on t.cidade = c.cidade " +
       "   where a.ativo = 'S' ");
   }
-  async countEmployee(
+  async countEmployees(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getEmployeeQuery();
+      query = await this.getEmployeesQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getEmployee(
+  async getEmployees(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -996,13 +996,13 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getEmployeeQuery();
+      query = await this.getEmployeesQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
   //Inventory
-  async getInventoryQuery(): Promise<string> {
+  async getInventoriesQuery(): Promise<string> {
     return (query =
       " select fil.filial as cnpjOrigemDados, current as dataAtualizacao, e.produto as iditem,  p.descrprodut as descricaoItem, " +
       "		    nvl(v.precopublico, 0) as vlrUnitario, e.rua || '-' ||  e.prateleira || '-' ||  e.gaveta as armazem, " +
@@ -1020,17 +1020,17 @@ export default class Repository implements RepositoryInterface {
       "       and (dtfim is null or dtfim >= cast(current as date)) " +
       "     where  e.saldocontabil > 0 ");
   }
-  async countInventory(
+  async countInventories(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.getInventoryQuery();
+      query = await this.getInventoriesQuery();
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getInventory(
+  async getInventories(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -1039,7 +1039,7 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.getInventoryQuery();
+      query = await this.getInventoriesQuery();
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
