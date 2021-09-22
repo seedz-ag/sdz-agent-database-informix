@@ -1,39 +1,66 @@
- "Select fil.cgccpf as cnpjOrigemDados,p.produto as id, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao," +
-      "	 '' as SKU, p.descrprodut as descricao, nvl(m.marcaf, ' ') as branding, p.unidvenda as um, 'Produto' as tipo, p.listaforn as IdFornecedor," +
-      "	 case nvl(e.dtdesativacao, 0) " +
-      "			 when 0 then 1" +
-      "			 else 0 " +
-      "	 end as status, " +
-      "		'ICMS' as tributacao, 0 as qtdDesconto, nvl(p.reffabrica, ' ') as codigoFabricante, l.descrlinha as segmento, " +
-      "	 g.descrgrupo as grupo, 'Novo' as estado, ' ' as modelo, ' ' as detalhes, nvl(b.cean, ' ') as barras, 'Normal' as situacao, p.classe, " +
-      "	 ' ' as cartela, 'Mobilidade' as nomeCaracteristica1, " +
-      "	 case " +
-      "			when t.tipogiro = 'A' then 'Alto Giro'" +
-      "			when t.tipogiro = 'B' then 'Baixo Giro' " +
-      "			when t.tipogiro = 'I' then 'Intermitente' " +
-      "			when t.tipogiro = 'S' then 'Sem Giro' " +
-      "			when t.tipogiro = 'V' then 'Veiculo'" +
-      "		end as valorCaracteristica1," +
-      "		 '' as NomeCaracteristica2, '' as valorCaracteristica2, '' as NomeCaracteristica3, '' as valorCaracteristica3," +
-      "		 '' as NomeCaracteristica4, '' as valorCaracteristica4, '' as NomeCaracteristica5, '' as valorCaracteristica5," +
-      "		 '' as NomeCaracteristica6, '' as valorCaracteristica6, '' as NomeCaracteristica7, '' as valorCaracteristica7 " +
-      " from cmprodut p " +
-      " inner join cmestoqu e	" +
-      "	on p.produto = e.produto" +
-      " and e.saldocontabil > 0 " +
-      " inner join cofilial fil " +
-      "	on fil.filial = e.filial" +
-      " inner join cmgrupos g " +
-      "	on p.id_grupos = g.id_grupos" +
-      " inner join cmlinhas l " +
-      "	on l.linha = g.linha" +
-      " left outer join cffornec m" +
-      "	on g.tppessoa = m.tppessoa" +
-      "	 and g.cgccpf = m.cgccpf 		" +
-      " left outer join cmclagir t " +
-      "	on t.classeabc = e.classeabc" +
-      "	and t.subclasse = e.subclasse " +
-      "	and t.filial = e.filial " +
-      " left outer join cmproean b " +
-      "	on b.produto = p.produto " +
-      " order by p.descrprodut "
+SELECT fil.cgccpf             AS cnpjOrigemDados,
+       p.produto              AS id,
+       Cast(CURRENT AS DATE)  AS dataCadastro,
+       Cast(CURRENT AS DATE)  AS dataAtualizacao,
+       ''                     AS SKU,
+       p.descrprodut          AS descricao,
+       Nvl(m.marcaf, ' ')     AS branding,
+       p.unidvenda            AS um,
+       'Produto'              AS tipo,
+       p.listaforn            AS IdFornecedor,
+       CASE Nvl(e.dtdesativacao, 0)
+         WHEN 0 THEN 1
+         ELSE 0
+       END                    AS status,
+       'ICMS'                 AS tributacao,
+       0                      AS qtdDesconto,
+       Nvl(p.reffabrica, ' ') AS codigoFabricante,
+       l.descrlinha           AS segmento,
+       g.descrgrupo           AS grupo,
+       'Novo'                 AS estado,
+       ' '                    AS modelo,
+       ' '                    AS detalhes,
+       Nvl(b.cean, ' ')       AS barras,
+       'Normal'               AS situacao,
+       p.classe,
+       ' '                    AS cartela,
+       'Mobilidade'           AS nomeCaracteristica1,
+       CASE
+         WHEN t.tipogiro = 'A' THEN 'Alto Giro'
+         WHEN t.tipogiro = 'B' THEN 'Baixo Giro'
+         WHEN t.tipogiro = 'I' THEN 'Intermitente'
+         WHEN t.tipogiro = 'S' THEN 'Sem Giro'
+         WHEN t.tipogiro = 'V' THEN 'Veiculo'
+       END                    AS valorCaracteristica1,
+       ''                     AS NomeCaracteristica2,
+       ''                     AS valorCaracteristica2,
+       ''                     AS NomeCaracteristica3,
+       ''                     AS valorCaracteristica3,
+       ''                     AS NomeCaracteristica4,
+       ''                     AS valorCaracteristica4,
+       ''                     AS NomeCaracteristica5,
+       ''                     AS valorCaracteristica5,
+       ''                     AS NomeCaracteristica6,
+       ''                     AS valorCaracteristica6,
+       ''                     AS NomeCaracteristica7,
+       ''                     AS valorCaracteristica7
+FROM   cmprodut p
+       INNER JOIN cmestoqu e
+               ON p.produto = e.produto
+                  AND e.saldocontabil > 0
+       INNER JOIN cofilial fil
+               ON fil.filial = e.filial
+       INNER JOIN cmgrupos g
+               ON p.id_grupos = g.id_grupos
+       INNER JOIN cmlinhas l
+               ON l.linha = g.linha
+       LEFT OUTER JOIN cffornec m
+                    ON g.tppessoa = m.tppessoa
+                       AND g.cgccpf = m.cgccpf
+       LEFT OUTER JOIN cmclagir t
+                    ON t.classeabc = e.classeabc
+                       AND t.subclasse = e.subclasse
+                       AND t.filial = e.filial
+       LEFT OUTER JOIN cmproean b
+                    ON b.produto = p.produto
+ORDER  BY p.descrprodut 

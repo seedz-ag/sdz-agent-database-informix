@@ -1,24 +1,44 @@
-" Select f.cgccpf as cnpjOrigemDados, ' ' as regraNegocio, o.id_orccap || nrolinha as idPedidoItem,  cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
-      " 	      i.id_orccap as idPedido, o.nroorcament as idPedidoQion, o.dtorcament as dataEmissao, 0 as status, 0 as barter, x.cgccpf as documentocliente,                              " +
-      " 	      f.cgccpf as documentoEmpresa, i.produto as idItem, 0 as skuItem, p.descrprodut as descricaoitem, p.unidvenda as unidMedidaItem, i.quantidade as qtd,                          " +
-      " 		   0 as qtdCanc, i.unitario as valorUnitLiq, i.unitario as valorUnitBru,                                                                                                    " +
-      " 		   case                                                                                                                                                                     " +
-      " 		     when i.unitario > 0 then  (i.descunit/i.unitario * 100)                                                                                                                " +
-      " 		     else 0                                                                                                                                                                 " +
-      " 		    end  as percDesconto,                                                                                                                                                   " +
-      " 		   i.descitem as valorDesc, (i.unitario * i.quantidade) as valorTotal, ' ' as idexcitem, i.mvtofisico as tipoMovimentacaoProdFat,                                           " +
-      " 		   i.quantidade as qtdFaturada                                                                                                                                              " +
-      "       from cnorcite i " +
-      "      inner join cnorccap o	   " +
-      " 	    on o.id_orccap = i.id_orccap " +
-      " 	 inner join ciendere e " +
-      " 	    on e.nro_endere = o.nro_endere " +
-      "      inner join cipessoa x " +
-      " 	    on x.tppessoa = e.tppessoa " +
-      " 	   and x.cgccpf   = e.cgccpf " +
-      "      inner join cmprodut p " +
-      "         on p.produto = i.produto	 " +
-      " 	 inner join cofilial f " +
-      " 	    on f.filial = o.filial " +
-      "     where year(o.dtorcament) = year(current) " +
-      " 	  order by o.id_orccap desc "
+SELECT f.cgccpf                      AS cnpjOrigemDados,
+       ' '                           AS regraNegocio,
+       o.id_orccap
+       || nrolinha                   AS idPedidoItem,
+       Cast(CURRENT AS DATE)         AS dataCadastro,
+       Cast(CURRENT AS DATE)         AS dataAtualizacao,
+       i.id_orccap                   AS idPedido,
+       o.nroorcament                 AS idPedidoQion,
+       o.dtorcament                  AS dataEmissao,
+       0                             AS status,
+       0                             AS barter,
+       x.cgccpf                      AS documentocliente,
+       f.cgccpf                      AS documentoEmpresa,
+       i.produto                     AS idItem,
+       0                             AS skuItem,
+       p.descrprodut                 AS descricaoitem,
+       p.unidvenda                   AS unidMedidaItem,
+       i.quantidade                  AS qtd,
+       0                             AS qtdCanc,
+       i.unitario                    AS valorUnitLiq,
+       i.unitario                    AS valorUnitBru,
+       CASE
+         WHEN i.unitario > 0 THEN ( i.descunit / i.unitario * 100 )
+         ELSE 0
+       END                           AS percDesconto,
+       i.descitem                    AS valorDesc,
+       ( i.unitario * i.quantidade ) AS valorTotal,
+       ' '                           AS idexcitem,
+       i.mvtofisico                  AS tipoMovimentacaoProdFat,
+       i.quantidade                  AS qtdFaturada
+FROM   cnorcite i
+       INNER JOIN cnorccap o
+               ON o.id_orccap = i.id_orccap
+       INNER JOIN ciendere e
+               ON e.nro_endere = o.nro_endere
+       INNER JOIN cipessoa x
+               ON x.tppessoa = e.tppessoa
+                  AND x.cgccpf = e.cgccpf
+       INNER JOIN cmprodut p
+               ON p.produto = i.produto
+       INNER JOIN cofilial f
+               ON f.filial = o.filial
+WHERE  Year(o.dtorcament) = Year(CURRENT)
+ORDER  BY o.id_orccap DESC 

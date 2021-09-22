@@ -1,19 +1,33 @@
-      " select f.cgccpf as cnpjOrigemDados, o.dtdocto as dataCadastro,  cast(current as date) as dataAtualizacao, " +
-      "        o.id_ordpag as titulo, p.cgccpf as idFornecedor, nvl(p.nomepessoa, ' ') as nomeFornecedor, o.dtdocto as dtEmissao, " +
-      "        o.nrodocto  as documento, o.serieop as serie, o.dtvenctoor as dtVencimentoOriginal, o.dtvencto as dtVencimentoProrrogado, " +
-      "        ' ' as competencia,  o.valor as vlrBruto, 0 as vlrAcrescimos, 0 as vlrDescontos, o.valor as vlrLiquido, o.seqdocto as parcela, " +
-      "         case o.liquidado " +
-      "              when 'S' then  'Liquidado' " +
-      "              when 'N' then  'Aberto' " +
-      "         end as situacao, nvl(q.dtpagto, ' ') as dtbaixa " +
-      "   from cpordpag o " +
-      "   inner join ciendere e " +
-      "     on e.nro_endere = o.nro_endere " +
-      "   inner join cipessoa p " +
-      "     on p.tppessoa = e.tppessoa " +
-      "    and p.cgccpf = e.cgccpf " +
-      "   inner join cofilial f " +
-      "     on f.filial = o.filial " +
-      "    left outer join cppagtos q " +
-      "     on  q.id_ordpag = o.id_ordpag " +
-      "    where year(dtdocto) = year(current) "
+SELECT f.cgccpf               AS cnpjOrigemDados,
+       o.dtdocto              AS dataCadastro,
+       Cast(CURRENT AS DATE)  AS dataAtualizacao,
+       o.id_ordpag            AS titulo,
+       p.cgccpf               AS idFornecedor,
+       Nvl(p.nomepessoa, ' ') AS nomeFornecedor,
+       o.dtdocto              AS dtEmissao,
+       o.nrodocto             AS documento,
+       o.serieop              AS serie,
+       o.dtvenctoor           AS dtVencimentoOriginal,
+       o.dtvencto             AS dtVencimentoProrrogado,
+       ' '                    AS competencia,
+       o.valor                AS vlrBruto,
+       0                      AS vlrAcrescimos,
+       0                      AS vlrDescontos,
+       o.valor                AS vlrLiquido,
+       o.seqdocto             AS parcela,
+       CASE o.liquidado
+         WHEN 'S' THEN 'Liquidado'
+         WHEN 'N' THEN 'Aberto'
+       END                    AS situacao,
+       Nvl(q.dtpagto, ' ')    AS dtbaixa
+FROM   cpordpag o
+       INNER JOIN ciendere e
+               ON e.nro_endere = o.nro_endere
+       INNER JOIN cipessoa p
+               ON p.tppessoa = e.tppessoa
+                  AND p.cgccpf = e.cgccpf
+       INNER JOIN cofilial f
+               ON f.filial = o.filial
+       LEFT OUTER JOIN cppagtos q
+                    ON q.id_ordpag = o.id_ordpag
+WHERE  Year(dtdocto) = Year(CURRENT) 

@@ -1,5 +1,10 @@
-"Select  fil.cgccpf as cnpjOrigemDados,  current as dataCadastro, current as dataAtualizacao,  " +
-      " a.id_grupos AS id, a.descrgrupo as descricao " +
-      " from cmgrupos a, cofilial fil " +
-      " where fil.filial in (select min(filial) from cofilial) " +
-      " order by a.descrgrupo "
+SELECT fil.cgccpf   AS cnpjOrigemDados,
+       CURRENT      AS dataCadastro,
+       CURRENT      AS dataAtualizacao,
+       a.id_grupos  AS id,
+       a.descrgrupo AS descricao
+FROM   cmgrupos a,
+       cofilial fil
+WHERE  fil.filial IN (SELECT Min(filial)
+                      FROM   cofilial)
+ORDER  BY a.descrgrupo 

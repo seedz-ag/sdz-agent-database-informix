@@ -1,20 +1,36 @@
-"select fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, p.cgccpf as id, " +
-      "      p.cgccpf as documento, nvl(p.razaoSocial, ' ') as razaoSocial, nvl(p.nomeguerra, ' ') as nomeFantasia, e.fone as telefoneFixo1, ' ' as telefoneFixo2, nvl(e.celular, ' ') as celular, " +
-      "      nvl(e.endeletronic, ' ') as email, e.endereco as logradouro, 0 as numero, e.bairro, e.cep, c.nomecidade as municipio, d.codigoibge as codibge, " +
-      "      c.ufederacao as uf, nvl(p.inscestadual, ' ') as inscricaoEstadual  " +
-      " from cffornec f " +
-      " inner join cipessoa p " +
-      "   on p.tppessoa = f.tppessoa " +
-      "  and p.cgccpf   = f.cgccpf " +
-      " inner join ciendere e " +
-      "   on e.tppessoa = p.tppessoa " +
-      "  and e.cgccpf = p.cgccpf " +
-      "  and e.ativo = 'S' " +
-      "  and e.principal = 'S' " +
-      " inner join cicidade c " +
-      "   on c.cidade = e.cidade " +
-      " inner join cicidect d " +
-      "   on d.cidade = c.cidade " +
-      " inner join cofilial fil " +
-      "   on fil.filial in (select min(filial) from cofilial) " +
-      " where f.tppessoa in (1,2) "
+SELECT fil.cgccpf               AS cnpjOrigemDados,
+       Cast(CURRENT AS DATE)    AS dataCadastro,
+       Cast(CURRENT AS DATE)    AS dataAtualizacao,
+       p.cgccpf                 AS id,
+       p.cgccpf                 AS documento,
+       Nvl(p.razaosocial, ' ')  AS razaoSocial,
+       Nvl(p.nomeguerra, ' ')   AS nomeFantasia,
+       e.fone                   AS telefoneFixo1,
+       ' '                      AS telefoneFixo2,
+       Nvl(e.celular, ' ')      AS celular,
+       Nvl(e.endeletronic, ' ') AS email,
+       e.endereco               AS logradouro,
+       0                        AS numero,
+       e.bairro,
+       e.cep,
+       c.nomecidade             AS municipio,
+       d.codigoibge             AS codibge,
+       c.ufederacao             AS uf,
+       Nvl(p.inscestadual, ' ') AS inscricaoEstadual
+FROM   cffornec f
+       INNER JOIN cipessoa p
+               ON p.tppessoa = f.tppessoa
+                  AND p.cgccpf = f.cgccpf
+       INNER JOIN ciendere e
+               ON e.tppessoa = p.tppessoa
+                  AND e.cgccpf = p.cgccpf
+                  AND e.ativo = 'S'
+                  AND e.principal = 'S'
+       INNER JOIN cicidade c
+               ON c.cidade = e.cidade
+       INNER JOIN cicidect d
+               ON d.cidade = c.cidade
+       INNER JOIN cofilial fil
+               ON fil.filial IN (SELECT Min(filial)
+                                 FROM   cofilial)
+WHERE  f.tppessoa IN ( 1, 2 ) 

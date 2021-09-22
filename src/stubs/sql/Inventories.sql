@@ -1,15 +1,29 @@
- " select fil.filial as cnpjOrigemDados, current as dataAtualizacao, e.produto as iditem,  p.descrprodut as descricaoItem, " +
-      "		    nvl(v.precopublico, 0) as vlrUnitario, e.rua || '-' ||  e.prateleira || '-' ||  e.gaveta as armazem, " +
-      "		    e.saldocontabil as QtdTotal, e.valorcontabil as vlrTotal, 0 as qtdPedidaVenda, 0 as QtdReservada, " +
-      "		0 as QtdPrevisaoEntrada, e.dtultsaid as dtUltimaVenda, e.dtultentr as dtUltimaCompra " +
-      "      from cmestoqu e " +
-      "      inner join cmprodut p " +
-      "        on e.produto = p.produto " +
-      "      inner join cofilial fil " +
-      "        on e.filial = fil.filial " +
-      "      left outer join cmpreest v " +
-      "        on v.filial = e.filial " +
-      "       and v.produto = e.produto " +
-      "       and dtinicio <= cast(current as date) " +
-      "       and (dtfim is null or dtfim >= cast(current as date)) " +
-      "     where  e.saldocontabil > 0 "
+SELECT fil.filial             AS cnpjOrigemDados,
+       CURRENT                AS dataAtualizacao,
+       e.produto              AS iditem,
+       p.descrprodut          AS descricaoItem,
+       Nvl(v.precopublico, 0) AS vlrUnitario,
+       e.rua
+       || '-'
+       || e.prateleira
+       || '-'
+       || e.gaveta            AS armazem,
+       e.saldocontabil        AS QtdTotal,
+       e.valorcontabil        AS vlrTotal,
+       0                      AS qtdPedidaVenda,
+       0                      AS QtdReservada,
+       0                      AS QtdPrevisaoEntrada,
+       e.dtultsaid            AS dtUltimaVenda,
+       e.dtultentr            AS dtUltimaCompra
+FROM   cmestoqu e
+       INNER JOIN cmprodut p
+               ON e.produto = p.produto
+       INNER JOIN cofilial fil
+               ON e.filial = fil.filial
+       LEFT OUTER JOIN cmpreest v
+                    ON v.filial = e.filial
+                       AND v.produto = e.produto
+                       AND dtinicio <= Cast(CURRENT AS DATE)
+                       AND ( dtfim IS NULL
+                              OR dtfim >= Cast(CURRENT AS DATE) )
+WHERE  e.saldocontabil > 0 

@@ -1,5 +1,18 @@
-"Select fil.cgccpf as cnpjOrigemDados, f.cgccpf || f.seqproprieagr as id, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
-      " f.cgccpf as idCliente, f.nompropr as razaoSocial, 0 as cnpj, '' as celular, '' as telefone, '' as inscestadual, '' as atividade, " +
-      " f.vlrareapropr as tamanho, 'ha' as unidadeMedidaTamanho " +
-      "  from ciproagr f, cofilial fil " +
-      " where fil.filial in (select min(filial) from cofilial) "
+SELECT fil.cgccpf            AS cnpjOrigemDados,
+       f.cgccpf
+       || f.seqproprieagr    AS id,
+       Cast(CURRENT AS DATE) AS dataCadastro,
+       Cast(CURRENT AS DATE) AS dataAtualizacao,
+       f.cgccpf              AS idCliente,
+       f.nompropr            AS razaoSocial,
+       0                     AS cnpj,
+       ''                    AS celular,
+       ''                    AS telefone,
+       ''                    AS inscestadual,
+       ''                    AS atividade,
+       f.vlrareapropr        AS tamanho,
+       'ha'                  AS unidadeMedidaTamanho
+FROM   ciproagr f,
+       cofilial fil
+WHERE  fil.filial IN (SELECT Min(filial)
+                      FROM   cofilial) 

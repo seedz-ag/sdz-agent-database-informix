@@ -1,14 +1,40 @@
- " select f.cgccpf as cnpjOrigemDados, '' as regraNegocio, id_nfitem as id,  nvl(n.dttransacao, n.dtnota) as dataCadastro, n.dtnota as dataAtualizacao,  " +
-      "     n.nronota as numero, n.serienf as serie, n.dtnota as dataEmissao, '0' as AceiteDuplicata, 0 as ControleCpr, 0 as idPedido, 0 as idPedidoQion,  " +
-      "     '' as dtPedido, 1 as tipo, f.cgccpf as documentoEmpresa, e.cgccpf as documentoCliente, e.cgccpf as idCliente, 0 as idNotaFiscalOrigem,  " +
-      "     0 as notaFiscalOrigem, i.mercadoria as iditem, i.descritem as descricaoItem, '' as brandingItem, '0' as skuItem, i.unidade as unidadeMedidaItem, " +
-      "     ' ' as loteitem, i.quantidade as quantidadeItem, i.valoritem as valorUnitarioItem, (i.quantidade * i.valoritem) as valorTotalItem, 0 as percentualDescItem, " +
-      "     i.valordesc as valorDescProd, i.valoritem as valorVendaItem, n.codfiscal as cfopitem " +
-      "  from cnnfitem i " +
-      "  inner join cnnfcapa n " +
-      "    on n.id_nfcapa = i.id_nfcapa " +
-      "  inner join ciendere e  " +
-      "    on e.nro_endere = n.nro_endere " +
-      "  inner join cofilial f " +
-      "    on f.filial = n.filial " +
-      " where n.dtnota = cast(current as date) "
+SELECT f.cgccpf                       AS cnpjOrigemDados,
+       ''                             AS regraNegocio,
+       id_nfitem                      AS id,
+       Nvl(n.dttransacao, n.dtnota)   AS dataCadastro,
+       n.dtnota                       AS dataAtualizacao,
+       n.nronota                      AS numero,
+       n.serienf                      AS serie,
+       n.dtnota                       AS dataEmissao,
+       '0'                            AS AceiteDuplicata,
+       0                              AS ControleCpr,
+       0                              AS idPedido,
+       0                              AS idPedidoQion,
+       ''                             AS dtPedido,
+       1                              AS tipo,
+       f.cgccpf                       AS documentoEmpresa,
+       e.cgccpf                       AS documentoCliente,
+       e.cgccpf                       AS idCliente,
+       0                              AS idNotaFiscalOrigem,
+       0                              AS notaFiscalOrigem,
+       i.mercadoria                   AS iditem,
+       i.descritem                    AS descricaoItem,
+       ''                             AS brandingItem,
+       '0'                            AS skuItem,
+       i.unidade                      AS unidadeMedidaItem,
+       ' '                            AS loteitem,
+       i.quantidade                   AS quantidadeItem,
+       i.valoritem                    AS valorUnitarioItem,
+       ( i.quantidade * i.valoritem ) AS valorTotalItem,
+       0                              AS percentualDescItem,
+       i.valordesc                    AS valorDescProd,
+       i.valoritem                    AS valorVendaItem,
+       n.codfiscal                    AS cfopitem
+FROM   cnnfitem i
+       INNER JOIN cnnfcapa n
+               ON n.id_nfcapa = i.id_nfcapa
+       INNER JOIN ciendere e
+               ON e.nro_endere = n.nro_endere
+       INNER JOIN cofilial f
+               ON f.filial = n.filial
+WHERE  n.dtnota = Cast(CURRENT AS DATE) 

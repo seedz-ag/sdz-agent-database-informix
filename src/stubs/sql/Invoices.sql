@@ -1,31 +1,41 @@
- " select f.cgccpf as cnpjOrigemDadosFaturamento, n.id_nfcapa as id,  n.dttransacao as dataCadastroFaturamento, n.dtnota as dataAtualizacaoFaturamento,  " +
-      "             n.cgccpf as idCliente, n.cgccpf as documentoCliente, n.nronota as numeroNfFaturamento, n.serienf as serieNFFaturamento, n.codfiscal as cfopFaturamento, " +
-      "             n.dtnota as dtEmissaoFaturamento, n.dttransacao as dtSaidaFaturamento, " +
-      "             case n.cancelada " +
-      "                     when 'N' then 'Concluida'  " +
-      "                     when 'S' then 'Cancelada'  " +
-      "                     when 'D' then 'Denegada'  " +
-      "                     when 'I' then 'Inutilizada' " +
-      "                     else 'Pendente'  " +
-      "             end as statusNfFaturamento,  " +
-      "             c.nomecidade as municipioEntregaFaturamento, c.ufederacao as ufEntregaFaturamento, " +
-      "             n.valoritem as vlrTotalProdutosFaturamento, n.totnfiscal as vlrTotalNfFaturamento,  " +
-      "             case  " +
-      "                 when v.devolucao = 'S' then 'D' " +
-      "                 when v.complemento = 'S' then 'C' " +
-      "                 else 'S' " +
-      "             end  as tipoFaturamento " +
-      "     from cnnfcapa n " +
-      "     inner join cofilial f " +
-      "       on n.filial = f.filial " +
-      "     inner join ciendere e " +
-      "       on e.nro_endere = n.nro_endere " +
-      "     inner join cicidade c " +
-      "       on  c.cidade         =   e.cidade   " +
-      "     inner join cttransa t " +
-      "        on t.transacao = n.transacao " +
-      "      and  t.mvtotransacao = 'S' " +
-      "     inner join cttptran v " +
-      "        on v.tipotransacao = t.tipotransacao    " +
-      "    where year(n.dtnota) = year(current) " +
-      "    order by n.nronota desc "
+SELECT f.cgccpf      AS cnpjOrigemDadosFaturamento,
+       n.id_nfcapa   AS id,
+       n.dttransacao AS dataCadastroFaturamento,
+       n.dtnota      AS dataAtualizacaoFaturamento,
+       n.cgccpf      AS idCliente,
+       n.cgccpf      AS documentoCliente,
+       n.nronota     AS numeroNfFaturamento,
+       n.serienf     AS serieNFFaturamento,
+       n.codfiscal   AS cfopFaturamento,
+       n.dtnota      AS dtEmissaoFaturamento,
+       n.dttransacao AS dtSaidaFaturamento,
+       CASE n.cancelada
+         WHEN 'N' THEN 'Concluida'
+         WHEN 'S' THEN 'Cancelada'
+         WHEN 'D' THEN 'Denegada'
+         WHEN 'I' THEN 'Inutilizada'
+         ELSE 'Pendente'
+       END           AS statusNfFaturamento,
+       c.nomecidade  AS municipioEntregaFaturamento,
+       c.ufederacao  AS ufEntregaFaturamento,
+       n.valoritem   AS vlrTotalProdutosFaturamento,
+       n.totnfiscal  AS vlrTotalNfFaturamento,
+       CASE
+         WHEN v.devolucao = 'S' THEN 'D'
+         WHEN v.complemento = 'S' THEN 'C'
+         ELSE 'S'
+       END           AS tipoFaturamento
+FROM   cnnfcapa n
+       INNER JOIN cofilial f
+               ON n.filial = f.filial
+       INNER JOIN ciendere e
+               ON e.nro_endere = n.nro_endere
+       INNER JOIN cicidade c
+               ON c.cidade = e.cidade
+       INNER JOIN cttransa t
+               ON t.transacao = n.transacao
+                  AND t.mvtotransacao = 'S'
+       INNER JOIN cttptran v
+               ON v.tipotransacao = t.tipotransacao
+WHERE  Year(n.dtnota) = Year(CURRENT)
+ORDER  BY n.nronota DESC 

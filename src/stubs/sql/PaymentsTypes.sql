@@ -1,3 +1,9 @@
-"Select fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, f.formapgto as id, f.descrforma as descricao " +
-      " from crforpgt f, cofilial fil " +
-      " where fil.filial in (select min(filial) from cofilial) "
+SELECT fil.cgccpf            AS cnpjOrigemDados,
+       Cast(CURRENT AS DATE) AS dataCadastro,
+       Cast(CURRENT AS DATE) AS dataAtualizacao,
+       f.formapgto           AS id,
+       f.descrforma          AS descricao
+FROM   crforpgt f,
+       cofilial fil
+WHERE  fil.filial IN (SELECT Min(filial)
+                      FROM   cofilial) 

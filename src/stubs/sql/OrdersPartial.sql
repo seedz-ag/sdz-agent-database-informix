@@ -1,16 +1,46 @@
-" select f.cgccpf as cnpjOrigemDadospedido, ' ' as regraNegocio, o.id_orccap as id,  current as dataCadastro, current as dataAtualizacao,  " +
-      "          o.nroorcament as IdPedidoQion, o.dtorcament as dataEmissao, 0 as status, p.cgccpf as idCliente, p.cgccpf as documentocliente, " +
-      " 	   f.cgccpf as documentoEmpresa, o.dtprevista as dataEntrega, 'Normal' as tipo, o.id_agente as vendedor1, 0 as vendedor2, " +
-      " 	   0 as vendedor3,  o.descmerc as vlrDesconto, o.condpgto as condPagamento, 0 as VlrParcela1, ' ' as vencParcela1,  0 as VlrParcela2, " +
-      " 	   ' ' as vencParcela2,  0 as VlrParcela3, ' ' as vencParcela3, 0 as VlrParcela4, ' ' as vencParcela4, 0 as VlrParcela5, ' ' as vencParcela5, " +
-      " 	    0 as VlrParcela6, ' ' as vencParcela6, 0 as VlrParcela7, ' ' as vencParcela7, 0 as VlrParcela8, ' ' as vencParcela8, " +
-      " 	   0 as VlrParcela9, ' ' as vencParcela9, o.valorfrete as vlrFrete " +
-      "   from cnorccap o " +
-      "  inner join ciendere e " +
-      "     on e.nro_endere = o.nro_endere " +
-      "     inner join cipessoa p " +
-      "     on p.tppessoa = e.tppessoa " +
-      "    and p.cgccpf   = e.cgccpf " +
-      "  inner join cofilial f " +
-      "     on f.filial = o.filial " +
-      " where o.dtorcament = cast(current as date) "
+SELECT f.cgccpf      AS cnpjOrigemDadospedido,
+       ' '           AS regraNegocio,
+       o.id_orccap   AS id,
+       CURRENT       AS dataCadastro,
+       CURRENT       AS dataAtualizacao,
+       o.nroorcament AS IdPedidoQion,
+       o.dtorcament  AS dataEmissao,
+       0             AS status,
+       p.cgccpf      AS idCliente,
+       p.cgccpf      AS documentocliente,
+       f.cgccpf      AS documentoEmpresa,
+       o.dtprevista  AS dataEntrega,
+       'Normal'      AS tipo,
+       o.id_agente   AS vendedor1,
+       0             AS vendedor2,
+       0             AS vendedor3,
+       o.descmerc    AS vlrDesconto,
+       o.condpgto    AS condPagamento,
+       0             AS VlrParcela1,
+       ' '           AS vencParcela1,
+       0             AS VlrParcela2,
+       ' '           AS vencParcela2,
+       0             AS VlrParcela3,
+       ' '           AS vencParcela3,
+       0             AS VlrParcela4,
+       ' '           AS vencParcela4,
+       0             AS VlrParcela5,
+       ' '           AS vencParcela5,
+       0             AS VlrParcela6,
+       ' '           AS vencParcela6,
+       0             AS VlrParcela7,
+       ' '           AS vencParcela7,
+       0             AS VlrParcela8,
+       ' '           AS vencParcela8,
+       0             AS VlrParcela9,
+       ' '           AS vencParcela9,
+       o.valorfrete  AS vlrFrete
+FROM   cnorccap o
+       INNER JOIN ciendere e
+               ON e.nro_endere = o.nro_endere
+       INNER JOIN cipessoa p
+               ON p.tppessoa = e.tppessoa
+                  AND p.cgccpf = e.cgccpf
+       INNER JOIN cofilial f
+               ON f.filial = o.filial
+WHERE  o.dtorcament = Cast(CURRENT AS DATE) 

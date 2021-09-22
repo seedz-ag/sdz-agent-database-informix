@@ -1,28 +1,55 @@
-"Select  fil.cgccpf as cnpjOrigemDados, cast(current as date) as dataCadastro, cast(current as date) as dataAtualizacao, " +
-      " p.cgccpf as id, p.nomepessoa as razaoSocial, nvl(p.nomeguerra, '') as nomeFantasia, p.cgccpf as documento,  1 as situacaoFinanceira, e.celular, " +
-      " e.fone as telefoneFixo, nvl(f.fone, '') as telefoneFixo2, nvl(e.endeletronic, '') as email, nvl(f.sexo, 'O') as sexo,  nvl(p.dtfundacao, ' ') as dataNascimento, " +
-      " nvl(p.inscestadual, '') as inscEstadual, y.nomepais as pais, '' as nomeContato, nvl(p.nrocarteira, ' ') as rg, nvl(p.inscmunicip, ' ') as inscMunicipal, 0 as vendedor1, 0 as vendedor2, " +
-      " '' as tipo, '' as grupo, cli.conceito as classe,  '' as site,  '' as grupoempresarial, nvl(e.inscprodutor, '') as car, nvl(i.simplesnacional, ' ') as simples, " +
-      " nvl(i.icms, ' ') as conticms, 1 as recir, '' as origem, '' as regiao " +
-      " from cipessoa p " +
-      " inner join clclient cli " +
-      " 	on cli.cgccpf = p.cgccpf " +
-      " inner join cofilial fil " +
-      " 	on fil.filial in (select min(filial) from cofilial) " +
-      " inner join ciendere e " +
-      " 	on e.tppessoa = p.tppessoa " +
-      " and e.cgccpf = p.cgccpf " +
-      " and e.ativo = 'S' " +
-      " and e.principal = 'S' " +
-      " inner join cicidect x " +
-      " 	on x.cidade = e.cidade " +
-      " inner join cipais y " +
-      " 	on y.codpais = x.codpais " +
-      " left outer join cicadfis f " +
-      " 	on f.tppessoa = p.tppessoa " +
-      " 	and f.cgccpf = p.cgccpf " +
-      " left outer join ciisento i " +
-      " 	on i.tppessoa = p.tppessoa " +
-      " 	and i.cgccpf = p.cgccpf " +
-      " where p.tppessoa in (1, 2) " +
-      " order by p.nomepessoa "
+SELECT fil.cgccpf                  AS cnpjOrigemDados,
+       Cast(CURRENT AS DATE)       AS dataCadastro,
+       Cast(CURRENT AS DATE)       AS dataAtualizacao,
+       p.cgccpf                    AS id,
+       p.nomepessoa                AS razaoSocial,
+       Nvl(p.nomeguerra, '')       AS nomeFantasia,
+       p.cgccpf                    AS documento,
+       1                           AS situacaoFinanceira,
+       e.celular,
+       e.fone                      AS telefoneFixo,
+       Nvl(f.fone, '')             AS telefoneFixo2,
+       Nvl(e.endeletronic, '')     AS email,
+       Nvl(f.sexo, 'O')            AS sexo,
+       Nvl(p.dtfundacao, ' ')      AS dataNascimento,
+       Nvl(p.inscestadual, '')     AS inscEstadual,
+       y.nomepais                  AS pais,
+       ''                          AS nomeContato,
+       Nvl(p.nrocarteira, ' ')     AS rg,
+       Nvl(p.inscmunicip, ' ')     AS inscMunicipal,
+       0                           AS vendedor1,
+       0                           AS vendedor2,
+       ''                          AS tipo,
+       ''                          AS grupo,
+       cli.conceito                AS classe,
+       ''                          AS site,
+       ''                          AS grupoempresarial,
+       Nvl(e.inscprodutor, '')     AS car,
+       Nvl(i.simplesnacional, ' ') AS simples,
+       Nvl(i.icms, ' ')            AS conticms,
+       1                           AS recir,
+       ''                          AS origem,
+       ''                          AS regiao
+FROM   cipessoa p
+       INNER JOIN clclient cli
+               ON cli.cgccpf = p.cgccpf
+       INNER JOIN cofilial fil
+               ON fil.filial IN (SELECT Min(filial)
+                                 FROM   cofilial)
+       INNER JOIN ciendere e
+               ON e.tppessoa = p.tppessoa
+                  AND e.cgccpf = p.cgccpf
+                  AND e.ativo = 'S'
+                  AND e.principal = 'S'
+       INNER JOIN cicidect x
+               ON x.cidade = e.cidade
+       INNER JOIN cipais y
+               ON y.codpais = x.codpais
+       LEFT OUTER JOIN cicadfis f
+                    ON f.tppessoa = p.tppessoa
+                       AND f.cgccpf = p.cgccpf
+       LEFT OUTER JOIN ciisento i
+                    ON i.tppessoa = p.tppessoa
+                       AND i.cgccpf = p.cgccpf
+WHERE  p.tppessoa IN ( 1, 2 )
+ORDER  BY p.nomepessoa 
