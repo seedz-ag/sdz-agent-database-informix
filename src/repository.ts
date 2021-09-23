@@ -14,7 +14,7 @@ export default class Repository implements RepositoryInterface {
     this.connector = connector;
   }
   //Test
-  async getTest(
+  async getTests(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -28,7 +28,7 @@ export default class Repository implements RepositoryInterface {
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
   }
-  async countTest(
+  async countTests(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -528,7 +528,7 @@ export default class Repository implements RepositoryInterface {
 
   async loadFile(file: string): Promise<string> {
     return fs
-      .readFileSync(`${__dirname}/../../config/sql/${file}.stub`)
+      .readFileSync(`${__dirname}/../../config/sql/${file}.sql`)
       .toString();
   }
 }
