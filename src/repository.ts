@@ -23,7 +23,7 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.loadFile("test");
+      query = await this.loadFile("tests");
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
@@ -33,7 +33,7 @@ export default class Repository implements RepositoryInterface {
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.loadFile("test");
+      query = await this.loadFile("tests");
 
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);

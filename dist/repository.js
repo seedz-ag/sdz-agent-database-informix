@@ -15,14 +15,14 @@ class Repository {
             const page = pagination.page - 1;
             const limit = pagination.limit;
             const skip = page * limit;
-            query = await this.loadFile("test");
+            query = await this.loadFile("tests");
             return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
         }
         catch (e) { }
     }
     async countTests(pagination, type) {
         try {
-            query = await this.loadFile("test");
+            query = await this.loadFile("tests");
             let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
