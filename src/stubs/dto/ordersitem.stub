@@ -1,6 +1,5 @@
 { 
     "cnpjOrigemDados": "cnpjorigemdados",
-    "id": "id",
     "regraNegocio": "regranegocio",
     "idPedidoItem": "idpedidoitem",
     "dataCadastro": "datacadastro",

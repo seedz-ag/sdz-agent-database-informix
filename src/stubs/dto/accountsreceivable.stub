@@ -1,11 +1,10 @@
 {
     "cnpjOrigemDados": "cnpjorigemdados",
-    "id": "id",
     "dataCadastro": "datacadastro",
     "dataAtualizacao": "dataatualizacao",
     "titulo": "titulo",
     "idCliente": "idcliente",
-    "nomeCliente": "nomecliente",
+    "nomeFornecedor": "nomecliente",
     "dtEmissao": "dtemissao",
     "documento": "documento",
     "serie": "serie",
