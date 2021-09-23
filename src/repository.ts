@@ -528,7 +528,7 @@ export default class Repository implements RepositoryInterface {
 
   async loadFile(file: string): Promise<string> {
     return fs
-      .readFileSync(`${__dirname}/../../config/sql/${file}.sql`)
+      .readFileSync(`${__dirname}/../../../config/sql/${file}.sql`)
       .toString();
   }
 }

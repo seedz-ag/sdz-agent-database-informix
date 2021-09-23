@@ -413,7 +413,7 @@ class Repository {
     }
     async loadFile(file) {
         return fs_1.default
-            .readFileSync(`${__dirname}/../../config/sql/${file}.sql`)
+            .readFileSync(`${__dirname}/../../../config/sql/${file}.sql`)
             .toString();
     }
 }
