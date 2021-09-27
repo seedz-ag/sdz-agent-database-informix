@@ -255,20 +255,20 @@ class Repository {
         catch (e) { }
     }
     //Payment Type
-    async countPaymentsType(pagination, type) {
+    async countPaymentsSpecie(pagination, type) {
         try {
-            query = await this.loadFile("paymentstype");
+            query = await this.loadFile("paymentsSpecie");
             let count = `SELECT count (*) as total from (${query})`;
             return this.connector.execute(count);
         }
         catch (e) { }
     }
-    async getPaymentsType(pagination, type) {
+    async getPaymentsSpecie(pagination, type) {
         try {
             const page = pagination.page - 1;
             const limit = pagination.limit;
             const skip = page * limit;
-            query = await this.loadFile("paymentstype");
+            query = await this.loadFile("paymentsSpecie");
             return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
         }
         catch (e) { }
@@ -407,6 +407,25 @@ class Repository {
             const limit = pagination.limit;
             const skip = page * limit;
             query = await this.loadFile("inventories");
+            return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
+        }
+        catch (e) { }
+    }
+    //Payments Condition
+    async countPaymentsCondition(pagination, type) {
+        try {
+            query = await this.loadFile("paymentscondition");
+            let count = `SELECT count (*) as total from (${query})`;
+            return this.connector.execute(count);
+        }
+        catch (e) { }
+    }
+    async getPaymentsCondition(pagination, type) {
+        try {
+            const page = pagination.page - 1;
+            const limit = pagination.limit;
+            const skip = page * limit;
+            query = await this.loadFile("paymentscondition");
             return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
         }
         catch (e) { }

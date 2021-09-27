@@ -24,8 +24,8 @@ export default class Repository implements RepositoryInterface {
     getInvoices(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     getInvoicesItem(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
     countInvoicesItem(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
-    countPaymentsType(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
-    getPaymentsType(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
+    countPaymentsSpecie(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
+    getPaymentsSpecie(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     countProviders(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     getProviders(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     getAccountsPay(pagination: PaginationInterface, type: string): Promise<DatabaseRow[]>;
@@ -38,5 +38,7 @@ export default class Repository implements RepositoryInterface {
     getEmployees(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     countInventories(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     getInventories(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
+    countPaymentsCondition(pagination?: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
+    getPaymentsCondition(pagination: PaginationInterface, type?: string): Promise<DatabaseRow[]>;
     loadFile(file: string): Promise<string>;
 }

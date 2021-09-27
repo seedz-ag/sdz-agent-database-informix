@@ -1,0 +1,10 @@
+SELECT fil.filial            AS cnpjOrigemDados,
+       Cast(CURRENT AS DATE) AS dataCadastro,
+       Cast(CURRENT AS DATE) AS dataAtualizacao,
+       c.condpgto            AS id,
+       c.descrcondpg         AS descricao
+FROM   crcondpg c,
+       cofilial fil
+WHERE  c.ativa = 'S'
+       AND fil.filial IN (SELECT Min(filial)
+                          FROM   cofilial) 
