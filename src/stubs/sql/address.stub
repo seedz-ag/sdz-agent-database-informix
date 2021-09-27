@@ -27,4 +27,4 @@ ON         fil.filial IN
            (
                   SELECT Min(filial)
                   FROM   cofilial)
-WHERE      e.tppessoa IN (1,2) )
+WHERE      e.tppessoa IN (1,2)
