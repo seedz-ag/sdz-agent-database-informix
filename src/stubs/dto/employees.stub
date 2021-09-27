@@ -4,6 +4,7 @@
     "dataAtualizacao": "dataatualizacao",
     "idFuncionario": "idfuncionario",
     "documento": "documento",
+    "id": "id",
     "nome": "nome",
     "celular": "celular",
     "email": "email",

@@ -2,6 +2,7 @@
     "cnpjOrigemDados": "cnpjorigemdados",
     "dataCadastro": "datacadastro",
     "dataAtualizacao": "dataatualizacao",
+    "id": "id",
     "titulo": "titulo",
     "idFornecedor": "idfornecedor",
     "nomeFornecedor": "nomefornecedor",

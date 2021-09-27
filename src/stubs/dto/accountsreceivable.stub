@@ -3,6 +3,7 @@
     "dataCadastro": "datacadastro",
     "dataAtualizacao": "dataatualizacao",
     "titulo": "titulo",
+    "id": "id",
     "idCliente": "idcliente",
     "nomeFornecedor": "nomecliente",
     "dtEmissao": "dtemissao",

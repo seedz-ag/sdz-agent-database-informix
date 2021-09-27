@@ -3,6 +3,7 @@
     "regraNegocio": "regranegocio",
     "idPedidoItem": "idpedidoitem",
     "dataCadastro": "datacadastro",
+    "id": "id",
     "dataAtualizacao": "dataatualizacao",
     "idPedido": "idpedido",
     "idPedidoQion": "idpedidoqion",

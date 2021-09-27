@@ -1,7 +1,8 @@
 {
     "cnpjOrigemDados": "cnpjorigemdados",
-    "dataCadastro": "datacadastro",
+    "dataAtualizacao": "dataAtualizacao",
     "idItem": "iditem",
+    "id": "id",
     "descricaoItem": "descricaoitem",
     "vlrUnitario": "vlrunitario",
     "armazem": "armazem",

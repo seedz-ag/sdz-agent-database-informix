@@ -3,6 +3,7 @@
     "dataCadastroFaturamento": "datacadastrofaturamento",
     "dataAtualizacaoFaturamento": "dataatualizacaofaturamento",
     "idCliente": "idcliente",
+    "id": "id",
     "documentoCliente": "documentocliente",
     "numeroNfFaturamento": "numeronffaturamento",
     "serieNfFaturamento": "serienffaturamento",

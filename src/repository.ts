@@ -327,17 +327,17 @@ export default class Repository implements RepositoryInterface {
     } catch (e) {}
   }
   //Payment Type
-  async countPaymentsType(
+  async countPaymentsSpecie(
     pagination?: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
     try {
-      query = await this.loadFile("paymentstype");
+      query = await this.loadFile("paymentsSpecie");
       let count = `SELECT count (*) as total from (${query})`;
       return this.connector.execute(count);
     } catch (e) {}
   }
-  async getPaymentsType(
+  async getPaymentsSpecie(
     pagination: PaginationInterface,
     type?: string
   ): Promise<DatabaseRow[]> {
@@ -346,7 +346,7 @@ export default class Repository implements RepositoryInterface {
       const limit = pagination.limit;
       const skip = page * limit;
 
-      query = await this.loadFile("paymentstype");
+      query = await this.loadFile("paymentsSpecie");
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
@@ -521,6 +521,31 @@ export default class Repository implements RepositoryInterface {
       const skip = page * limit;
 
       query = await this.loadFile("inventories");
+
+      return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
+    } catch (e) {}
+  }
+  //Payments Condition
+  async countPaymentsCondition(
+    pagination?: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
+    try {
+      query = await this.loadFile("paymentscondition");
+      let count = `SELECT count (*) as total from (${query})`;
+      return this.connector.execute(count);
+    } catch (e) {}
+  }
+  async getPaymentsCondition(
+    pagination: PaginationInterface,
+    type?: string
+  ): Promise<DatabaseRow[]> {
+    try {
+      const page = pagination.page - 1;
+      const limit = pagination.limit;
+      const skip = page * limit;
+
+      query = await this.loadFile("paymentscondition");
 
       return this.connector.execute(query + ` SKIP ${skip} LIMIT ${limit}`);
     } catch (e) {}
