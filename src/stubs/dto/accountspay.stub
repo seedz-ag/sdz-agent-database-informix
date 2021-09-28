@@ -14,7 +14,7 @@
     "competencia": "competencia",
     "vlrBruto": "vlrbruto",
     "vlrAcrescimos": "vlracrescimos",
-    "vlrDescontos": "vlrdescontos",
+    "vlrDesconto": "vlrdescontos",
     "vlrLiquido": "vlrliquido",
     "parcela": "parcela",
     "situacao": "situacao",
