@@ -2,6 +2,8 @@ SELECT f.cgccpf                      AS cnpjOrigemDados,
        ' '                           AS regraNegocio,
        o.id_orccap
        || nrolinha                   AS idPedidoItem,
+       o.id_orccap
+       || nrolinha                   AS id,
        Cast(CURRENT AS DATE)         AS dataCadastro,
        Cast(CURRENT AS DATE)         AS dataAtualizacao,
        i.id_orccap                   AS idPedido,

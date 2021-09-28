@@ -1,6 +1,7 @@
 SELECT fil.filial             AS cnpjOrigemDados,
        CURRENT                AS dataAtualizacao,
        e.produto              AS iditem,
+       e.produto              AS id,
        p.descrprodut          AS descricaoItem,
        Nvl(v.precopublico, 0) AS vlrUnitario,
        e.rua
