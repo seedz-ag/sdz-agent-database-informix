@@ -8,7 +8,7 @@
     "numeroNfFaturamento": "numeronffaturamento",
     "serieNfFaturamento": "serienffaturamento",
     "cfopFaturamento": "cfopfaturamento",
-    "dtEmissaoFaturamento": "dtEmissaofaturamento",
+    "dtEmissaoFaturamento": "dtemissaofaturamento",
     "dtSaidaFaturamento": "dtsaidafaturamento",
     "statusNfFaturamento": "statusnffaturamento",
     "municipioEntregaFaturamento": "municipioentregafaturamento",

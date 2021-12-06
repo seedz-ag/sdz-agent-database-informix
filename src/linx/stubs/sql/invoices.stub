@@ -1,4 +1,5 @@
-SELECT f.cgccpf      AS cnpjOrigemDadosFaturamento,
+SELECT 
+	   f.cgccpf      AS cnpjOrigemDadosFaturamento,
        n.id_nfcapa   AS id,
        n.dttransacao AS dataCadastroFaturamento,
        n.dtnota      AS dataAtualizacaoFaturamento,
@@ -33,8 +34,7 @@ FROM   cnnfcapa n
        INNER JOIN cicidade c
                ON c.cidade = e.cidade
        INNER JOIN cttransa t
-               ON t.transacao = n.transacao
-                  AND t.mvtotransacao = 'S'
+               ON t.transacao = n.transacao and ((t.tipotransacao = 10 and t.mvtotransacao = 'S') or (t.tipotransacao  = 40 and t.mvtotransacao = 'E'))  
        INNER JOIN cttptran v
                ON v.tipotransacao = t.tipotransacao
 WHERE  Year(n.dtnota) = Year(CURRENT)

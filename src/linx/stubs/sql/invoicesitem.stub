@@ -11,7 +11,7 @@ SELECT f.cgccpf                       AS cnpjOrigemDados,
        0                              AS idPedido,
        0                              AS idPedidoQion,
        ''                             AS dtPedido,
-       1                              AS tipo,
+       case when  c.tipotransacao = 10 THEN 1 else 0 end  as tipo,
        f.cgccpf                       AS documentoEmpresa,
        e.cgccpf                       AS documentoCliente,
        e.cgccpf                       AS idCliente,
@@ -20,7 +20,7 @@ SELECT f.cgccpf                       AS cnpjOrigemDados,
        i.mercadoria                   AS iditem,
        i.descritem                    AS descricaoItem,
        ''                             AS brandingItem,
-       '0'                            AS skuItem,
+       i.mercadoria                   AS skuItem,
        i.unidade                      AS unidadeMedidaItem,
        ' '                            AS loteitem,
        i.quantidade                   AS quantidadeItem,
@@ -37,4 +37,7 @@ FROM   cnnfitem i
                ON e.nro_endere = n.nro_endere
        INNER JOIN cofilial f
                ON f.filial = n.filial
+       inner join cmprodut p on i.mercadoria = p.produto 
+       inner join cmgrupos g on g.id_grupos = p.id_grupos and (g.linha = 10)
+	   INNER join cttransa c on c.transacao = n.transacao  and ((c.tipotransacao = 10 and c.mvtotransacao = 'S') or (c.tipotransacao  = 40 and c.mvtotransacao = 'E'))  
 WHERE  Year(n.dtnota) = Year(CURRENT) 
