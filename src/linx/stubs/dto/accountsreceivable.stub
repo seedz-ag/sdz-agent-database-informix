@@ -5,7 +5,7 @@
     "titulo": "titulo",
     "id": "id",
     "idCliente": "idcliente",
-    "nomeFornecedor": "nomecliente",
+    "nomeCliente": "nomecliente",
     "dataEmissao": "dtemissao",
     "documento": "documento",
     "serie": "serie",

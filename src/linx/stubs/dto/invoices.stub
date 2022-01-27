@@ -7,7 +7,7 @@
     "documentoCliente": "documentocliente",
     "numeroNfFaturamento": "numeronffaturamento",
     "serieNfFaturamento": "serienffaturamento",
-    "cfopFaturamento": "cfopfaturamento",
+    "cfop": "cfopfaturamento",
     "dtEmissaoFaturamento": "dtemissaofaturamento",
     "dtSaidaFaturamento": "dtsaidafaturamento",
     "statusNfFaturamento": "statusnffaturamento",
